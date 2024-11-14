@@ -47,3 +47,21 @@ spec:
 ```
 
 往元数据中写入`cle.log.req.lua`和`cle.log.rsp.lua`数据，这样修改版本的Envoy才能正常上报包含http body信息的Span。
+
+## 采样率
+
+istio默认的采样率为1%，测试环境如果需要调整，那么可以使用如下配置，参考[istio官方文档](https://istio.io/latest/docs/tasks/observability/distributed-tracing/mesh-and-proxy-config/#customizing-trace-sampling)：
+
+```yaml
+apiVersion: install.istio.io/v1alpha1
+kind: IstioOperator
+metadata:
+  name: istio-control-plane
+  namespace: istio-system
+spec:
+  meshConfig:
+    enableTracing: true
+    defaultConfig:
+      tracing:
+        sampling: 100
+```
