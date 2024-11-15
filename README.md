@@ -7,7 +7,7 @@ It is based on [Envoy](http://envoyproxy.io) with the addition of several policy
 
 增加了在Tracing的Span中额外记录http headers和http response的功能，方便定位。(仅适用于`release-1.17`版本)。
 
-**需要增加Envoy的http filter来写入额外数据。**
+**1. 需要增加Envoy的http filter来写入额外数据。**
 
 ```yaml
 apiVersion: networking.istio.io/v1alpha3
