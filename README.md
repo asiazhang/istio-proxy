@@ -27,10 +27,11 @@ spec:
             inlineCode: |
 
               function envoy_on_request(request_handle)
+                request_handle:headers():remove("accept-encoding") # disable gzip
                 local body = request_handle:body(true)
                 local body_length = body:length()
                 local bodyString = tostring(body:getBytes(0, body_length))
-                # request_handle:logWarn("Request body length: ".. body_length)
+                request_handle:logWarn("Request body length: ".. body_length)
                 request_handle:logWarn("Try adding HTTP request body to dynamic metadata.")
                 request_handle:streamInfo():dynamicMetadata():set("cle.log.req.lua", "body", bodyString)
               end
@@ -40,7 +41,7 @@ spec:
                 local body = response_handle:body(true)
                 local body_length = body:length()
                 local bodyString = tostring(body:getBytes(0, body_length))
-                # response_handle:logWarn("Response body length: " .. body_length)
+                response_handle:logWarn("Response body length: " .. body_length)
                 response_handle:logWarn("Try adding HTTP response body to dynamic metadata.")
                 response_handle:streamInfo():dynamicMetadata():set("cle.log.rsp.lua", "body", bodyString)
               end
