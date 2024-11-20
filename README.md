@@ -3,6 +3,37 @@
 The Istio Proxy is a microservice proxy that can be used on the client and server side, and forms a microservice mesh.
 It is based on [Envoy](http://envoyproxy.io) with the addition of several policy and telemetry extensions.
 
+## 构建说明
+
+一键式构建修改版本的istio-proxy `1.17.8`版本。
+
+```bash
+#!/bin/bash
+set -ex
+
+WORKDIR=$PWD
+RELEASE=release-1.17
+rm -rf istio-proxy/
+git clone https://github.com/asiazhang/istio-proxy.git
+cd istio-proxy
+git checkout ${RELEASE}
+git --no-pager log -1
+
+mkdir -p /data/docker_bazel_cache
+# make your changes to the source code
+echo $PWD
+docker run -it -w /work -v /data/docker_bazel_cache:/home/.cache/bazel -v $PWD:/work gcr.io/istio-testing/build-tools-proxy:${RELEASE}-latest bash -c "make build_envoy"
+
+cp /data/docker_bazel_cache/_bazel_root/1e0bb3bee2d09d2e4ad3523530d3b40c/execroot/io_istio_proxy/bazel-out/aarch64-opt/bin/envoy $WORKDIR/envoy
+file $WORKDIR/envoy
+
+image_name=xxx/istio/proxyv2:1.17.8-enhance
+
+cd $WORKDIR
+docker build -t ${image_name} .
+docker push ${image_name}
+```
+
 ## 使用说明
 
 增加了在Tracing的Span中额外记录http headers和http response的功能，方便定位。(仅适用于`release-1.17`版本)。
