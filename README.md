@@ -58,6 +58,13 @@ spec:
             inlineCode: |
 
               function envoy_on_request(request_handle)
+                -- 检查是否是WebSocket连接，是则不处理
+                local headers = request_handle:headers()
+                local upgrade = headers:get("upgrade")
+                if upgrade and upgrade:lower() == "websocket" then
+                  return
+                end
+
                 request_handle:headers():remove("accept-encoding") # disable gzip
                 local body = request_handle:body(true)
                 local body_length = body:length()
@@ -69,6 +76,13 @@ spec:
 
 
               function envoy_on_response(response_handle)
+                -- 检查是否是WebSocket连接，是则不处理
+                local headers = request_handle:headers()
+                local upgrade = headers:get("upgrade")
+                if upgrade and upgrade:lower() == "websocket" then
+                  return
+                end
+
                 local body = response_handle:body(true)
                 local body_length = body:length()
                 local bodyString = tostring(body:getBytes(0, body_length))
