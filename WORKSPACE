@@ -31,16 +31,16 @@ bind(
     actual = "//external:ssl",
 )
 
-# 1. Determine SHA256 `wget https://github.com/envoyproxy/envoy/archive/$COMMIT.tar.gz && sha256sum $COMMIT.tar.gz`
+# 1. Determine SHA256 `wget https://github.com/asiazhang/envoy/archive/$COMMIT.tar.gz && sha256sum $COMMIT.tar.gz`
 # 2. Update .bazelversion, envoy.bazelrc and .bazelrc if needed.
 #
 
 # Commit date: 2023-12-18
 ENVOY_SHA = "ffdedd22c877a4fdfef1d58334ca3c93c1b8b663"
 
-ENVOY_SHA256 = "3c3f12189c59cab17105a5677e5c2982eed070fe3090e8d4855b5dea87f3b152"
+ENVOY_SHA256 = "3fb065a576e7cf648a1f974db81092cd7c2c994677023ba5f19a6c9aa6957110"
 
-ENVOY_ORG = "envoyproxy"
+ENVOY_ORG = "asiazhang"
 
 ENVOY_REPO = "envoy"
 
