@@ -36,7 +36,7 @@ bind(
 #
 
 # Commit date: 2023-12-18
-ENVOY_SHA = "ffdedd22c877a4fdfef1d58334ca3c93c1b8b663"
+ENVOY_SHA = "be8d748c3b11ab6f59fad5e81ac90fbe3033e266"
 
 ENVOY_SHA256 = "3fb065a576e7cf648a1f974db81092cd7c2c994677023ba5f19a6c9aa6957110"
 
