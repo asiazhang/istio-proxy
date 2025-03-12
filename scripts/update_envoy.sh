@@ -26,7 +26,7 @@ set -u
 set -x
 
 # Update to main as envoyproxy/proxy has updated.
-UPDATE_BRANCH=${UPDATE_BRANCH:-"main"}
+UPDATE_BRANCH="release-1.18"
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd -P)"
 WORKSPACE=${ROOT}/WORKSPACE
